@@ -308,10 +308,11 @@ public class LevelBorderChallenge extends Setting {
 
     private void updateBorder(World world, Location center, int size, boolean animate) {
         if (useAPI) {
-            PacketBorder border = packetBorders.get(world);
+            WorldBorder border = playerWorldBorders.get(world);
+            border.setCenter(center);
             double x = center.getX();
             double z = center.getZ();
-            // Auch für PacketBorder die Nether-Korrektur anwenden
+            // fix bug that causes border to be misplaced
             if (world.getEnvironment() == World.Environment.NETHER) {
                 x *= 8;
                 z *= 8;
